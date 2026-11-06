@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSTAFO BAXTIYOROV | Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: white;
+    color: #080808;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* LOADING */
+
+#loader {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: .8s;
+}
+
+.loader-m {
+    font-size: 150px;
+    font-weight: 1000;
+    color: black;
+    animation: pulse 1s infinite alternate;
+}
+
+#percent {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+@keyframes pulse {
+    from { transform: scale(.9); }
+    to { transform: scale(1.1); }
+}
+
+/* CURSOR */
+
+#cursor {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    font-size: 27px;
+    font-weight: 1000;
+    color: black;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 12px #999, 0 0 25px #bbb;
+}
+
+#cursor.hover {
+    transform: translate(-50%, -50%) scale(1.7);
+}
+
+/* NAVBAR */
+
+header {
+    width: 100%;
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 1000;
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #888;
+}
+
+.languages {
+    display: flex;
+    gap: 10px;
+}
+
+.languages button {
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.languages button.active {
+    border-bottom: 2px solid black;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 750px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: white;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 75%;
+    height: 130%;
+    background: #050505;
+    right: -25%;
+    top: -15%;
+    transform: skewX(-13deg);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding-left: 9%;
+    width: 60%;
+}
+
+.hero-content .small {
+    letter-spacing: 5px;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 7vw, 95px);
+    font-weight: 1000;
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+.hero h1 span {
+    color: #888;
+}
+
+.hero-description {
+    margin-top: 25px;
+    max-width: 430px;
+    color: #666;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 16px 28px;
+    border: 1px solid black;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: .3s;
+    display: inline-block;
+}
+
+.btn-dark {
+    background: black;
+    color: white;
+}
+
+.btn:hover {
+    background: #888;
+    color: white;
+    border-color: #888;
+}
+
+.hero-photo {
+    position: absolute;
+    z-index: 2;
+    right: 8%;
+    bottom: 0;
+    width: 37%;
+    height: 85%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.hero-photo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    border-radius: 20px;
+}
+
+.map {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: .15;
+    background-image: radial-gradient(circle, #fff 1px, transparent 1.5px);
+    background-size: 15px 15px;
+    mask-image: radial-gradient(ellipse, black 20%, transparent 75%);
+}
+
+/* SECTIONS */
+
+section.content-section {
+    padding: 110px 9%;
+}
+
+.section-title {
+    font-size: clamp(32px, 5vw, 55px);
+    font-weight: 1000;
+    margin-bottom: 18px;
+    letter-spacing: -2px;
+}
+
+.section-line {
+    width: 60px;
+    height: 5px;
+    background: black;
+    margin-bottom: 45px;
+}
+
+.about-text {
+    max-width: 800px;
+    color: #666;
+    font-size: 18px;
+    line-height: 2;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 45px;
+}
+
+.stat {
+    padding: 30px;
+    border: 1px solid #ddd;
+}
+
+.stat h3 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.stat p {
+    color: #888;
+    font-size: 13px;
+}
+
+/* DARK SECTION */
+
+.dark-section {
+    background: #050505;
+    color: white;
+}
+
+.dark-section .section-line {
+    background: white;
+}
+
+/* JOURNEY */
+
+.timeline {
+    border-left: 2px solid #555;
+    margin-left: 10px;
+    padding-left: 30px;
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -37px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+}
+
+.timeline-item h3 {
+    margin-bottom: 10px;
+}
+
+.timeline-item p {
+    color: #999;
+    line-height: 1.8;
+}
+
+/* SKILLS */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.skill-name {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.skill-bar {
+    height: 7px;
+    background: #ddd;
+    overflow: hidden;
+}
+
+.skill-bar div {
+    height: 100%;
+    background: #080808;
+    animation: grow 2s ease;
+}
+
+@keyframes grow {
+    from { width: 0; }
+}
+
+/* PROJECTS */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.project {
+    min-height: 240px;
+    background: #080808;
+    color: white;
+    padding: 35px;
+    position: relative;
+    overflow: hidden;
+    transition: .4s;
+}
+
+.project:hover {
+    transform: translateY(-10px);
+    background: #222;
+}
+
+.project-number {
+    font-size: 13px;
+    color: #888;
+}
+
+.project h3 {
+    font-size: 27px;
+    margin-top: 45px;
+    margin-bottom: 15px;
+}
+
+.project p {
+    color: #aaa;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.project a {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+/* GOALS */
+
+.goal-box {
+    padding: 45px;
+    background: #f1f1f1;
+    line-height: 2;
+    color: #555;
+    font-size: 17px;
+}
+
+/* CONTACT */
+
+.contact-box {
+    background: #050505;
+    color: white;
+    padding: 60px;
+    text-align: center;
+}
+
+.contact-box h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.contact-box p {
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.contact-box a {
+    display: inline-block;
+    padding: 15px 30px;
+    border: 1px solid white;
+    transition: .3s;
+}
+
+.contact-box a:hover {
+    background: white;
+    color: black;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 30px;
+    background: #050505;
+    color: #777;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* MUSIC */
+
+.music-btn {
+    position: fixed;
+    z-index: 1000;
+    bottom: 25px;
+    left: 25px;
+    background: black;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.music-btn.playing {
+    background: #555;
+}
+
+.youtube-player {
+    position: fixed;
+    z-index: 999;
+    bottom: 80px;
+    left: 25px;
+    width: 300px;
+    height: 170px;
+    display: none;
+    overflow: hidden;
+    border: 2px solid #111;
+    border-radius: 12px;
+    background: black;
+}
+
+.youtube-player iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* BACK TO TOP */
+
+#topBtn {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: black;
+    color: white;
+    border: none;
+    padding: 15px;
+    display: none;
+    z-index: 100;
+}
+
+/* ANIMATION */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: .8s;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width: 800px) {
+    header {
+        padding: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        font-size: 10px;
+    }
+
+    .hero {
+        height: auto;
+        min-height: 850px;
+        align-items: flex-start;
+        padding-top: 180px;
+    }
+
+    .hero::before {
+        width: 100%;
+        height: 50%;
+        right: -10%;
+        top: 50%;
+    }
+
+    .hero-content {
+        width: 100%;
+        padding: 0 7%;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero-photo {
+        width: 75%;
+        height: 42%;
+        right: 10%;
+    }
+
+    section.content-section {
+        padding: 75px 7%;
+    }
+
+    .stats,
+    .skills-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-box {
+        padding: 35px 20px;
+    }
+
+    .contact-box h2 {
+        font-size: 30px;
+    }
+
+    #cursor {
+        display: none;
+    }
+
+    * {
+        cursor: auto;
+    }
+
+    .youtube-player {
+        width: 260px;
+        height: 150px;
+        left: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loader">
+    <div class="loader-m">M</div>
+    <div id="percent">0%</div>
+</div>
+
+<div id="cursor">M</div>
+
+<!-- NAVIGATION -->
+<header>
+    <div class="logo">M.</div>
+
+    <nav>
+        <a href="#about" data-i="nav1">ABOUT</a>
+        <a href="#journey" data-i="nav2">MY JOURNEY</a>
+        <a href="#skills" data-i="nav3">SKILLS</a>
+        <a href="#projects" data-i="nav4">PROJECTS</a>
+        <a href="#contact" data-i="nav5">CONTACT</a>
+    </nav>
+
+    <div class="languages">
+        <button class="active" onclick="setLang('uz',this)">UZ</button>
+        <button onclick="setLang('ru',this)">RU</button>
+        <button onclick="setLang('en',this)">ENG</button>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="map"></div>
+
+    <div class="hero-content">
+        <div class="small" data-i="welcome">PERSONAL PORTFOLIO</div>
+
+        <h1>MUSTAFO<br><span>BAXTIYOROV</span></h1>
+
+        <p class="hero-description" data-i="heroText">
+            Men zamonaviy texnologiyalar olamiga qiziquvchi yosh dasturchiman.
+            Kreativ g‘oyalarni zamonaviy loyihalarga aylantirishni yaxshi ko‘raman.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-dark" data-i="viewProjects">LOYIHALARIM</a>
+            <a href="#contact" class="btn" data-i="contactMe">BOG‘LANISH</a>
+        </div>
+    </div>
+
+    <div class="hero-photo">
+        <img src="mustafo_2026.jpg" alt="Mustafo Baxtiyorov">
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="content-section reveal" id="about">
+    <h2 class="section-title" data-i="aboutTitle">MEN HAQIMDA</h2>
+    <div class="section-line"></div>
+
+    <p class="about-text" data-i="aboutText">
+        Men zamonaviy texnologiyalar olamiga qiziquvchi, IT sohasida
+        o‘z bilim va tajribamni oshirib borayotgan yosh dasturchiman.
+        Maqsadim — kreativ g‘oyalarni zamonaviy loyihalarga aylantirish
+        va kelajakda kuchli IT mutaxassisi bo‘lish.
+    </p>
+
+    <div class="stats">
+        <div class="stat">
+            <h3>IT</h3>
+            <p data-i="stat1">Mening yo‘nalishim</p>
+        </div>
+        <div class="stat">
+            <h3>∞</h3>
+            <p data-i="stat2">O‘rganish imkoniyati</p>
+        </div>
+        <div class="stat">
+            <h3>M</h3>
+            <p data-i="stat3">Shaxsiy brendim</p>
+        </div>
+    </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="content-section dark-section reveal" id="journey">
+    <h2 class="section-title" data-i="journeyTitle">MENING IT YO‘LIM</h2>
+    <div class="section-line"></div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3 data-i="journey1">IT olamiga qadam</h3>
+            <p data-i="journeyText1">
+                Zamonaviy texnologiyalar va dasturlashga qiziqishim boshlandi.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3 data-i="journey2">Web Development</h3>
+            <p data-i="journeyText2">
+                HTML va CSS yordamida dastlabki saytlarimni yaratishni boshladim.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3 data-i="journey3">Yangi loyihalar</h3>
+            <p data-i="journeyText3">
+                O‘z g‘oyalarim asosida foydali web loyihalar ustida ishlayapman.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3 data-i="journey4">Kelajak</h3>
+            <p data-i="journeyText4">
+                Kuchli dasturchi bo‘lish va yangi texnologiyalarni o‘rganishda davom etish.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section class="content-section reveal" id="skills">
+    <h2 class="section-title">MY SKILLS</h2>
+    <div class="section-line"></div>
+
+    <div class="skills-grid">
+        <div>
+            <div class="skill-name"><span>HTML</span><span>95%</span></div>
+            <div class="skill-bar"><div style="width:85%"></div></div>
+        </div>
+
+        <div>
+            <div class="skill-name"><span>CSS</span><span>85%</span></div>
+            <div class="skill-bar"><div style="width:75%"></div></div>
+        </div>
+
+        <div>
+            <div class="skill-name"><span>JavaScript</span><span>90%</span></div>
+            <div class="skill-bar"><div style="width:40%"></div></div>
+        </div>
+
+        <div>
+            <div class="skill-name"><span>Figma</span><span>85%</span></div>
+            <div class="skill-bar"><div style="width:55%"></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="content-section dark-section reveal" id="projects">
+    <h2 class="section-title" data-i="projectsTitle">MENING LOYIHALARIM</h2>
+    <div class="section-line"></div>
+
+    <div class="projects-grid">
+
+        <div class="project">
+            <div class="project-number">01 / AI</div>
+            <h3>OU7 AI</h3>
+            <p data-i="project1">Sun’iy intellekt va zamonaviy texnologiyalarga asoslangan loyiha.</p>
+            <a href="#" data-i="projectMore">LOYIHA HAQIDA ↗</a>
+        </div>
+
+        <div class="project">
+            <div class="project-number">02 / AI</div>
+            <h3>AI ASSISTANT</h3>
+            <p data-i="project2">Foydalanuvchilarga yordam berishga mo‘ljallangan AI yordamchi.</p>
+            <a href="#" data-i="projectMore">LOYIHA HAQIDA ↗</a>
+        </div>
+
+        <div class="project">
+            <div class="project-number">03 / WEB</div>
+            <h3>QARZ DAFTARI</h3>
+            <p data-i="project3">Qarzlarni yozish, hisoblash va boshqarish uchun web dastur.</p>
+            <a href="#" data-i="projectMore">LOYIHA HAQIDA ↗</a>
+        </div>
+
+        <div class="project">
+            <div class="project-number">04 / GAME</div>
+            <h3>MY GAME</h3>
+            <p data-i="project4">Interaktiv o‘yin loyihasi.</p>
+            <a href="#" data-i="projectMore">LOYIHA HAQIDA ↗</a>
+        </div>
+
+        <div class="project">
+            <div class="project-number">05 / WEB</div>
+            <h3>NEW PROJECT</h3>
+            <p data-i="project5">Yangi g‘oyalar va zamonaviy texnologiyalar asosidagi loyiha.</p>
+            <a href="#" data-i="projectMore">LOYIHA HAQIDA ↗</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- GOALS -->
+<section class="content-section reveal" id="goals">
+    <h2 class="section-title" data-i="goalsTitle">KELAJAKDAGI MAQSADLARIM</h2>
+    <div class="section-line"></div>
+
+    <div class="goal-box" data-i="goalsText">
+        Kelajakda kuchli IT mutaxassisi bo‘lish, professional web saytlar,
+        dasturlar va sun’iy intellekt loyihalarini yaratish.
+        Doimiy ravishda yangi bilimlarni o‘rganish va o‘z ustimda ishlash.
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="content-section reveal" id="contact">
+    <div class="contact-box">
+        <h2 data-i="contactTitle">KELING, BOG‘LANAMIZ!</h2>
+        <p data-i="contactText">
+            Hamkorlik va yangi g‘oyalar uchun men bilan bog‘laning.
+        </p>
+        <a href="https://t.me/Mustafo_373" target="_blank">
+            TELEGRAM ↗
+        </a>
+    </div>
+</section>
+
+<footer>
+    © 2026 MUSTAFO BAXTIYOROV. ALL RIGHTS RESERVED.
+</footer>
+
+<!-- MUSIC -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+    ♫ MUSIC OFF
+</button>
+
+<div class="youtube-player" id="youtubeMusic">
+    <iframe
+        id="musicFrame"
+        src=""
+        title="Portfolio background music"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+    </iframe>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    ↑
+</button>
+
+<script>
+
+/* LOADING */
+
+let count = 0;
+let percent = document.getElementById("percent");
+let loader = document.getElementById("loader");
+
+let loading = setInterval(() => {
+    count++;
+    percent.innerText = count + "%";
+
+    if(count >= 100) {
+        clearInterval(loading);
+
+        setTimeout(() => {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.remove(), 800);
+        }, 300);
+    }
+}, 20);
+
+
+/* M CURSOR */
+
+let cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+});
+
+document.querySelectorAll("a, button").forEach(item => {
+    item.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+    item.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
+});
+
+
+/* SCROLL ANIMATION */
+
+let observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+}, {threshold:0.12});
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+
+/* BACK TO TOP */
+
+window.addEventListener("scroll", () => {
+    document.getElementById("topBtn").style.display =
+        window.scrollY > 500 ? "block" : "none";
+});
+
+
+/* MUSIC */
+
+let musicOn = false;
+
+function toggleMusic() {
+    const player = document.getElementById("youtubeMusic");
+    const frame = document.getElementById("musicFrame");
+    const btn = document.getElementById("musicBtn");
+
+    if (!musicOn) {
+        player.style.display = "block";
+
+        frame.src =
+        "https://www.youtube.com/embed/jZilDNLQPgA?autoplay=1&loop=1&playlist=jZilDNLQPgA";
+
+        btn.innerText = "♫ MUSIC ON";
+        btn.classList.add("playing");
+
+        musicOn = true;
+    } else {
+        frame.src = "";
+        player.style.display = "none";
+
+        btn.innerText = "♫ MUSIC OFF";
+        btn.classList.remove("playing");
+
+        musicOn = false;
+    }
+}
+
+
+/* LANGUAGES */
+
+const translations = {
+
+uz: {
+nav1:"MEN HAQIMDA",
+nav2:"IT YO‘LIM",
+nav3:"KO‘NIKMALAR",
+nav4:"LOYIHALAR",
+nav5:"ALOQA",
+welcome:"SHAXSIY PORTFOLIO",
+heroText:"Men zamonaviy texnologiyalar olamiga qiziquvchi yosh dasturchiman. Kreativ g‘oyalarni zamonaviy loyihalarga aylantirishni yaxshi ko‘raman.",
+viewProjects:"LOYIHALARIM",
+contactMe:"BOG‘LANISH",
+aboutTitle:"MEN HAQIMDA",
+aboutText:"Men zamonaviy texnologiyalar olamiga qiziquvchi, IT sohasida o‘z bilim va tajribamni oshirib borayotgan yosh dasturchiman. Maqsadim — kreativ g‘oyalarni zamonaviy loyihalarga aylantirish va kelajakda kuchli IT mutaxassisi bo‘lish.",
+stat1:"Mening yo‘nalishim",
+stat2:"O‘rganish imkoniyati",
+stat3:"Shaxsiy brendim",
+journeyTitle:"MENING IT YO‘LIM",
+journey1:"IT olamiga qadam",
+journeyText1:"Zamonaviy texnologiyalar va dasturlashga qiziqishim boshlandi.",
+journey2:"Web Development",
+journeyText2:"HTML va CSS yordamida dastlabki saytlarimni yaratishni boshladim.",
+journey3:"Yangi loyihalar",
+journeyText3:"O‘z g‘oyalarim asosida foydali web loyihalar ustida ishlayapman.",
+journey4:"Kelajak",
+journeyText4:"Kuchli dasturchi bo‘lish va yangi texnologiyalarni o‘rganishda davom etish.",
+projectsTitle:"MENING LOYIHALARIM",
+project1:"Sun’iy intellekt va zamonaviy texnologiyalarga asoslangan loyiha.",
+project2:"Foydalanuvchilarga yordam berishga mo‘ljallangan AI yordamchi.",
+project3:"Qarzlarni yozish, hisoblash va boshqarish uchun web dastur.",
+project4:"Interaktiv o‘yin loyihasi.",
+project5:"Yangi g‘oyalar va zamonaviy texnologiyalar asosidagi loyiha.",
+projectMore:"LOYIHA HAQIDA ↗",
+goalsTitle:"KELAJAKDAGI MAQSADLARIM",
+goalsText:"Kelajakda kuchli IT mutaxassisi bo‘lish, professional web saytlar, dasturlar va sun’iy intellekt loyihalarini yaratish. Doimiy ravishda yangi bilimlarni o‘rganish va o‘z ustimda ishlash.",
+contactTitle:"KELING, BOG‘LANAMIZ!",
+contactText:"Hamkorlik va yangi g‘oyalar uchun men bilan bog‘laning."
+},
+
+ru: {
+nav1:"ОБО МНЕ",
+nav2:"МОЙ ПУТЬ",
+nav3:"НАВЫКИ",
+nav4:"ПРОЕКТЫ",
+nav5:"КОНТАКТЫ",
+welcome:"ЛИЧНОЕ ПОРТФОЛИО",
+heroText:"Я молодой разработчик, интересующийся миром современных технологий. Люблю превращать творческие идеи в современные проекты.",
+viewProjects:"МОИ ПРОЕКТЫ",
+contactMe:"СВЯЗАТЬСЯ",
+aboutTitle:"ОБО МНЕ",
+aboutText:"Я молодой разработчик, интересующийся современными технологиями и постоянно развивающий свои знания в сфере IT. Моя цель — превращать творческие идеи в современные проекты и стать сильным IT-специалистом.",
+stat1:"Моё направление",
+stat2:"Возможности обучения",
+stat3:"Мой личный бренд",
+journeyTitle:"МОЙ IT ПУТЬ",
+journey1:"Первые шаги в IT",
+journeyText1:"Начался мой интерес к современным технологиям и программированию.",
+journey2:"Web Development",
+journeyText2:"Я начал создавать первые сайты с помощью HTML и CSS.",
+journey3:"Новые проекты",
+journeyText3:"Работаю над полезными веб-проектами на основе собственных идей.",
+journey4:"Будущее",
+journeyText4:"Стремлюсь стать сильным разработчиком и изучать новые технологии.",
+projectsTitle:"МОИ ПРОЕКТЫ",
+project1:"Проект на основе искусственного интеллекта и современных технологий.",
+project2:"AI-помощник, предназначенный для помощи пользователям.",
+project3:"Веб-программа для записи, расчёта и управления долгами.",
+project4:"Интерактивный игровой проект.",
+project5:"Проект на основе новых идей и современных технологий.",
+projectMore:"О ПРОЕКТЕ ↗",
+goalsTitle:"МОИ БУДУЩИЕ ЦЕЛИ",
+goalsText:"Стать сильным IT-специалистом, создавать профессиональные сайты, программы и проекты искусственного интеллекта. Постоянно учиться и развиваться.",
+contactTitle:"ДАВАЙТЕ ОБЩАТЬСЯ!",
+contactText:"Свяжитесь со мной для сотрудничества и новых идей."
+},
+
+en: {
+nav1:"ABOUT ME",
+nav2:"MY JOURNEY",
+nav3:"SKILLS",
+nav4:"PROJECTS",
+nav5:"CONTACT",
+welcome:"PERSONAL PORTFOLIO",
+heroText:"I am a young developer interested in modern technology. I love turning creative ideas into modern projects.",
+viewProjects:"MY PROJECTS",
+contactMe:"CONTACT ME",
+aboutTitle:"ABOUT ME",
+aboutText:"I am a young developer interested in modern technology and constantly improving my knowledge in IT. My goal is to turn creative ideas into modern projects and become a skilled IT specialist.",
+stat1:"My direction",
+stat2:"Learning opportunities",
+stat3:"My personal brand",
+journeyTitle:"MY IT JOURNEY",
+journey1:"First steps into IT",
+journeyText1:"My interest in modern technology and programming began.",
+journey2:"Web Development",
+journeyText2:"I started creating my first websites using HTML and CSS.",
+journey3:"New projects",
+journeyText3:"I am working on useful web projects based on my own ideas.",
+journey4:"The future",
+journeyText4:"My goal is to become a skilled developer and keep learning new technologies.",
+projectsTitle:"MY PROJECTS",
+project1:"A project based on artificial intelligence and modern technologies.",
+project2:"An AI assistant designed to help users.",
+project3:"A web application for recording, calculating and managing debts.",
+project4:"An interactive game project.",
+project5:"A project based on new ideas and modern technologies.",
+projectMore:"ABOUT PROJECT ↗",
+goalsTitle:"MY FUTURE GOALS",
+goalsText:"To become a skilled IT specialist and create professional websites, applications and artificial intelligence projects. To keep learning and improving.",
+contactTitle:"LET'S CONNECT!",
+contactText:"Contact me for collaboration and new ideas."
+}
+
+};
+
+function setLang(lang, button) {
+    document.querySelectorAll(".languages button").forEach(b => {
+        b.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll("[data-i]").forEach(element => {
+        let key = element.getAttribute("data-i");
+
+        if(translations[lang][key]) {
+            element.innerText = translations[lang][key];
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>
